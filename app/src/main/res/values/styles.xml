@@ -1,0 +1,54 @@
+<resources>
+    <!-- ESSES TEMAS SÃO DEFINIDOS OU POR APLICAÇAO OU POR ACTIVITY NO MANIFEST -->
+    //TEMA 01
+
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/black</item>
+    </style>
+
+
+    //TEMA 02
+
+    <style name="FullscreenTheme" parent="AppTheme">
+        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
+        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
+        <item name="android:textColorSecondary">@android:color/black</item>
+    </style>
+
+
+    //TEMA 03
+
+    <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
+        <item name="android:textColorSecondary">@android:color/black</item>
+    </style>
+
+
+    //TEMA 04
+
+    <style name="Theme.MyTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- colorPrimary é usado para a barra de ação padrão background -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!-- colorPrimaryDark é usado para a barra de status -->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!-- colorAccent é usado como o valor padrão para colorControlActivated, que é usado para colorir widgets -->
+        <item name="colorAccent">@color/colorAccent</item>
+        <!-- Você também pode definir colorControlNormal , colorControlActivated
+         colorControlHighlight , e colorSwitchThumbNormal -->
+
+    </style>
+
+    <style name="Theme.MyTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.MyTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>

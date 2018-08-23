@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fundo_cadastro"
+    android:layout_gravity="center_vertical|center_horizontal"
+    tools:context=".Telas.TelaCadastro">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="484dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true">
+
+        <Button
+            android:id="@+id/btCadastrar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="85dp"
+            android:background="@drawable/campotexto"
+            android:text="CADASTRAR" />
+
+        <Button
+            android:id="@+id/btLogar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="33dp"
+            android:background="@drawable/campotexto"
+            android:text="LOGAR" />
+
+        <EditText
+            android:id="@+id/ctNomeCadastrar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="124dp"
+            android:background="@drawable/campotexto"
+            android:ems="10"
+            android:hint=" Digite seu nome completo"
+            android:inputType="textPersonName"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/black" />
+
+        <EditText
+            android:id="@+id/ctSenhaCadastrar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="172dp"
+            android:background="@drawable/campotexto"
+            android:ems="10"
+            android:hint=" Digite sua senha"
+            android:inputType="textPassword"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/black" />
+
+        <EditText
+            android:id="@+id/ctEmailCadastrar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/campotexto"
+            android:ems="10"
+            android:hint=" Digite seu email"
+            android:inputType="textEmailAddress"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/black" />
+
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="135dp"
+            android:layout_height="92dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:src="@mipmap/usuario" />
+
+    </RelativeLayout></RelativeLayout>

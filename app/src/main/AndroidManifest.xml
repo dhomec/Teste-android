@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.back4app.quickstartexampleapp">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="    Lojas"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyTheme">
+        <activity android:name=".Telas.TelaLogin">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.parse.SERVER_URL"
+            android:value="@string/back4app_server_url" />
+        <meta-data
+            android:name="com.parse.APPLICATION_ID"
+            android:value="@string/back4app_app_id" />
+        <meta-data
+            android:name="com.parse.CLIENT_KEY"
+            android:value="@string/back4app_client_key" />
+
+        <activity android:name=".Telas.TelaCadastro" />
+        <activity android:name=".TelasSetores.TelaFarmacias" />
+        <activity android:name=".TelasSetores.TelaAutomotivo" />
+        <activity android:name=".TelasSetores.TelaAlimentacao" />
+        <activity android:name=".TelasSetores.TelaBeleza" />
+        <activity android:name=".TelasSetores.TelaModa" />
+        <activity android:name=".TelasSetores.TelaDomestico" />
+        <activity android:name=".TelasSetores.TelaEletronicos" />
+        <activity android:name=".TelasPerfil.TelaPerfil" />
+        <activity android:name=".TelasPerfil.TelaConfiguracao" />
+        <activity android:name=".TelasPerfil.TelaPontos" />
+        <activity android:name=".TelasPerfil.TelaSugestoes" />
+        <activity
+            android:name=".Telas.TelaSetor"
+            android:label="    Shopping"
+            android:theme="@style/Theme.MyTheme" />
+        <activity android:name=".TelasPerfil.TelaEndereco"></activity>
+    </application>
+
+</manifest>

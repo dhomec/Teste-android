@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_perfil"
+            android:icon="@mipmap/ic_menu_perfil2"
+            android:title="Perfil" />
+        <item
+            android:id="@+id/nav_enderecos"
+            android:icon="@mipmap/ic_menu_enderecos"
+            android:title="Meus endereços" />
+        <item
+            android:id="@+id/nav_pontos"
+            android:icon="@mipmap/ic_menu_pontos"
+            android:title="Meus pontos" />
+        <item
+            android:id="@+id/nav_lixos"
+            android:icon="@mipmap/ic_menu_carro"
+            android:title="Minhas Compras" />
+        <item
+            android:id="@+id/nav_denuncias"
+            android:icon="@mipmap/ic_menu_horario"
+            android:title="Meus agendamentos" />
+
+    </group>
+
+    <item android:title="Comunicação">
+        <menu>
+            <item
+                android:id="@+id/nav_parceiros"
+                android:icon="@mipmap/ic_menu_parceiros"
+                android:title="Parceiros" />
+            <item
+                android:id="@+id/nav_desenvolvedores"
+                android:icon="@mipmap/ic_menu_desenvolvedores"
+                android:title="Desenvolvedores" />
+        </menu>
+    </item>
+
+</menu>
