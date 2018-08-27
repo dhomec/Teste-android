@@ -10,10 +10,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.back4app.quickstartexampleapp.R;
-import com.back4app.quickstartexampleapp.util.ParseErros;
-import com.parse.ParseException;
-import com.parse.ParseUser;
-import com.parse.SignUpCallback;
+//import com.back4app.quickstartexampleapp.util.ParseErros;
+//import com.parse.ParseException;
+//import com.parse.ParseUser;
+//import com.parse.SignUpCallback;
 
 public class TelaCadastro extends Activity {
 
@@ -39,12 +39,10 @@ public class TelaCadastro extends Activity {
         btCadastrar = (Button) findViewById(R.id.btCadastrar);
         btLogar = (Button) findViewById(R.id.btLogar);
 
-        btCadastrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cadastrarUsuario();
-            }
-        });
+        //btCadastrar.setOnClickListener(new View.OnClickListener() {
+        //@Override
+        //public void onClick(View view) {
+          //      cadastrarUsuario();           }        });
 
 
         btLogar.setOnClickListener(new View.OnClickListener() {
@@ -59,36 +57,31 @@ public class TelaCadastro extends Activity {
     }
 
     //cadastrando usuarios
-    private void cadastrarUsuario() {
-                ParseUser usuario = new ParseUser();
-                usuario.setUsername( ctNome.getText().toString());
-                usuario.setPassword( ctSenha.getText().toString());
-                usuario.setEmail( ctEmail.getText().toString());
+    //private void cadastrarUsuario() {
+                //ParseUser usuario = new ParseUser();
+                //usuario.setUsername( ctNome.getText().toString());
+                //usuario.setPassword( ctSenha.getText().toString());
+                //usuario.setEmail( ctEmail.getText().toString());
 
                 //salvando dados do usuario
-        usuario.signUpInBackground(new SignUpCallback() {
-        @Override
-        public void done(ParseException e) {
-            if(e == null){
-                Toast.makeText(TelaCadastro.this, "Cadastro realizado com sucesso!", Toast.LENGTH_LONG).show();
-                abrirLoginUsuario();
-            }else{
+       // usuario.signUpInBackground(new SignUpCallback() {
+        //@Override
+        //public void done(ParseException e) {
+            //if(e == null){
+                //Toast.makeText(TelaCadastro.this, "Cadastro realizado com sucesso!", Toast.LENGTH_LONG).show();
+                //abrirLoginUsuario();
+            //}else{
 
-                ParseErros parseErros = new ParseErros();
-                String erro = parseErros.getErro(e.getCode());
+                //ParseErros parseErros = new ParseErros();
+                //String erro = parseErros.getErro(e.getCode());
 
-                Toast.makeText(TelaCadastro.this, erro, Toast.LENGTH_LONG).show();
-            }
-
-        }
-    });
-            }
+                //Toast.makeText(TelaCadastro.this, erro, Toast.LENGTH_LONG).show();          }        }    });            }
 
     //depois do cadastro o usuario vai para tela de login e se depois irá para tela de lista
-    private void abrirLoginUsuario(){
-    Intent intent = new Intent(TelaCadastro.this, TelaLogin.class);
-    startActivity(intent);
-    finish();
+   // private void abrirLoginUsuario(){
+    //Intent intent = new Intent(TelaCadastro.this, TelaLogin.class);
+   // startActivity(intent);
+   // finish();
     }
 
 
@@ -182,4 +175,4 @@ public class TelaCadastro extends Activity {
 
 
 
-}
+

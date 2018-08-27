@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/loginback"
+    android:background="@mipmap/backlogin"
     android:layout_gravity="center_vertical|center_horizontal"
     tools:context="com.back4app.quickstartexampleapp.Telas.TelaLogin">
 
@@ -12,54 +12,55 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true">
 
 
         <Button
             android:id="@+id/btCriarConta"
-            android:layout_width="106dp"
+            android:layout_width="225dp"
             android:layout_height="40dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="26dp"
+            android:layout_alignParentStart="@+id/Login"
+            android:layout_alignParentLeft="true"
+
+            android:layout_marginBottom="24dp"
             android:background="@drawable/campotexto"
             android:text="NOVA CONTA" />
 
         <EditText
-            android:id="@+id/ctNome"
-            android:layout_width="170dp"
+            android:id="@+id/ctEmail"
+            android:layout_width="185dp"
             android:layout_height="40dp"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="70dp"
-            android:layout_marginTop="141dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="139dp"
             android:background="@drawable/campotexto"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="textEmailAddress"
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/black" />
 
         <EditText
             android:id="@+id/ctSenha"
-            android:layout_width="184dp"
+            android:layout_width="185dp"
             android:layout_height="40dp"
             android:layout_alignParentTop="true"
-            android:layout_alignStart="@+id/ctNome"
-            android:layout_marginTop="184dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="196dp"
             android:background="@drawable/campotexto"
             android:ems="10"
+            android:inputType="textPassword"
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/black" />
 
         <ImageView
             android:id="@+id/Login"
-            android:layout_width="262dp"
-            android:layout_height="227dp"
+            android:layout_width="162dp"
+            android:layout_height="153dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="74dp"
-            android:layout_marginEnd="48dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="167dp"
             android:src="@mipmap/botaologin" />
 
 

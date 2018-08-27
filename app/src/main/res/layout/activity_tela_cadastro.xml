@@ -53,12 +53,27 @@
             android:textColorHint="@android:color/black" />
 
         <EditText
+            android:id="@+id/ctRepetirSenha"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="171dp"
+            android:background="@drawable/campotexto"
+            android:ems="10"
+            android:hint=" Repita sua senha"
+            android:inputType="textPassword"
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/black" />
+
+        <EditText
             android:id="@+id/ctSenhaCadastrar"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="172dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
             android:background="@drawable/campotexto"
             android:ems="10"
             android:hint=" Digite sua senha"
@@ -70,7 +85,10 @@
             android:id="@+id/ctEmailCadastrar"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_centerInParent="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="171dp"
             android:background="@drawable/campotexto"
             android:ems="10"
             android:hint=" Digite seu email"

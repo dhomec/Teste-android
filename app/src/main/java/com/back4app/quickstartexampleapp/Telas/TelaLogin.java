@@ -4,27 +4,36 @@ import android.app.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.back4app.quickstartexampleapp.DAO.ConfiguracaoFirebase;
 import com.back4app.quickstartexampleapp.R;
 import com.back4app.quickstartexampleapp.util.ParseErros;
-import com.parse.LogInCallback;
-import com.parse.ParseException;
-import com.parse.ParseUser;
+import com.back4app.quickstartexampleapp.util.Usuario;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+//import com.parse.LogInCallback;
+//import com.parse.ParseException;
+//import com.parse.ParseUser;
 
 public class TelaLogin extends Activity {
 
 
     private Button btCriarConta;
-    private ImageView Login;
+    private ImageView btLogin;
 
-    private EditText ctNome;
+    private EditText ctEmail;
     private EditText ctSenha;
 
+    private FirebaseAuth autenticacao;
+    private Usuario usuario;
 
 
 
@@ -34,29 +43,33 @@ public class TelaLogin extends Activity {
         setContentView(R.layout.activity_tela_login);
 
 
-        //Deslogando se o usuario estiver logado
-       ParseUser.logOut();
-        //chamando metodos de verificar e mandar para tela de dentro
-        verificarUsuarioLogado();
-
 
         btCriarConta = (Button) findViewById(R.id.btCriarConta);
-        Login = (ImageView) findViewById(R.id.Login);
 
-        ctNome = (EditText) findViewById(R.id.ctNome);
+        btLogin = (ImageView) findViewById(R.id.Login);
+
+        ctEmail = (EditText) findViewById(R.id.ctEmail);
         ctSenha = (EditText) findViewById(R.id.ctSenha);
 
 
 
-        Login.setOnClickListener(new View.OnClickListener() {
+        btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String usuario = ctNome.getText().toString();
-                String senha = ctSenha.getText().toString();
+            //Verificando se o campo usuario e senha não estão em branco, instanciando a classe o usuario e conferindo os dados
+                if (!ctEmail.getText().toString().equals("") && !ctSenha.getText().toString().equals("")){
 
-                verificarlogin(usuario, senha);
+                    usuario = new Usuario();
+                    usuario.setEmail(ctEmail.getText().toString());
+                    usuario.setSenha(ctSenha.getText().toString());
+                    validarlogin();
+
+
+                }else {
+                Toast.makeText(TelaLogin.this, "Preencha os campos de E-mail e Senha", Toast.LENGTH_LONG).show();
+
             }
-        });
+        }});
 
 
         btCriarConta.setOnClickListener(new View.OnClickListener() {
@@ -68,42 +81,63 @@ public class TelaLogin extends Activity {
 
 
     }
-
-    //no parse quando cria a conta o usuario ja fica logado ou quando ele abrir o app novamente
-    private void verificarUsuarioLogado(){
-        if(ParseUser.getCurrentUser() != null){
-            //se for diferente de null o usuario esta logado devendo envialo para tela principal
-            abrirTelaDentroLista();
-        }}
-    //para criar a intent de ir para a tela de dentro lista
-    private void abrirTelaDentroLista(){
-        Intent intent = new Intent(TelaLogin.this, TelaSetor.class);
-        startActivity(intent);
-        finish();//para fechar essa tela
-    }
-
-    private void verificarlogin (String usuario, String senha){
-        ParseUser.logInInBackground(usuario, senha, new LogInCallback() {
+        private void validarlogin(){
+        autenticacao = ConfiguracaoFirebase.getFirebaseAuth();
+        autenticacao.signInWithEmailAndPassword(usuario.getEmail().toString(), usuario.getSenha().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void done(ParseUser user, ParseException e) {
-                if(e == null){
-                    Toast.makeText(TelaLogin.this, "Login realizado com sucesso!", Toast.LENGTH_LONG).show();
-                    abrirTelaDentroLista();
-                }else{
-                    ParseErros parseErros = new ParseErros();
-                    String erro = parseErros.getErro(e.getCode());
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
 
-                    Toast.makeText(TelaLogin.this, erro , Toast.LENGTH_LONG).show();
+                   abrirteladedentroLista();
+                   Toast.makeText(TelaLogin.this, "Login efetuado com sucesso!", Toast.LENGTH_SHORT);
+
+                }else{
+                   Toast.makeText(TelaLogin.this, "Usuário ou Senha inválido. Tente novamente!", Toast.LENGTH_SHORT);
                 }
             }
         });
+        }
+        private void abrirteladedentroLista() {
+            Intent intent = new Intent(TelaLogin.this, TelaSetor.class);
+            startActivity(intent);
+        }
+
+
+
+
     }
 
 
 
+         //BANCO DE DADOS BACK4APP
+     //Deslogando se o usuario estiver logado
+     //ParseUser.logOut();
+     //chamando metodos de verificar e mandar para tela de dentro
+     // verificarUsuarioLogado();
 
-
-
+     //BANCO DE DADOS BACK4APP
+     //no parse quando cria a conta o usuario ja fica logado ou quando ele abrir o app novamente
+     //private void verificarUsuarioLogado(){
+     //if(ParseUser.getCurrentUser() != null){
+     //se for diferente de null o usuario esta logado devendo envialo para tela principal
+     //abrirTelaDentroLista();}}
+     //para criar a intent de ir para a tela de dentro lista
+     //private void abrirTelaDentroLista(){
+     //Intent intent = new Intent(TelaLogin.this, TelaSetor.class);
+     //startActivity(intent);
+     //finish();//para fechar essa tela    }
+     //private void verificarlogin (String usuario, String senha){
+     //ParseUser.logInInBackground(usuario, senha, new LogInCallback() {
+     //@Override
+     //public void done(ParseUser user, ParseException e) {
+     //if(e == null){
+     //Toast.makeText(TelaLogin.this, "Login realizado com sucesso!", Toast.LENGTH_LONG).show();
+     //abrirTelaDentroLista();
+     //}else{
+     //ParseErros parseErros = new ParseErros();
+     //String erro = parseErros.getErro(e.getCode());
+     //Toast.makeText(TelaLogin.this, erro , Toast.LENGTH_LONG).show();
+     //   }            }        });    }
     /*
     //CADASTRO DE USUARIO - FAZER LOGIN
     ParseUser usuario = new ParseUser();
@@ -148,13 +182,7 @@ public class TelaLogin extends Activity {
       }
     });
     */
-
-
-
-
-
-        //ParseAnalytics.trackAppOpenedInBackground(getIntent());
-
+    //ParseAnalytics.trackAppOpenedInBackground(getIntent());
     /*//para criar a tabelinha e dados
     ParseObject cadastro = new ParseObject("Cadastro");
     cadastro.put("Nome", "Tereza");
@@ -171,7 +199,6 @@ public class TelaLogin extends Activity {
       }
     });
     */
-
     /*
     //para atualizar os dados ja existentes
     ParseQuery<ParseObject> Consulta = ParseQuery.getQuery("Cadastro");
@@ -191,7 +218,6 @@ public class TelaLogin extends Activity {
     /*
     //filtrar dados da classe pontuação
     ParseQuery<ParseObject> filtrodebanco = ParseQuery.getQuery("Cadastro");
-
     //filtros varios tipos de dados usando o parse
     //voce pode colocar mais de um filtro que combinem logicamente
     //filtrodebanco.whereGreaterThan("Nome", "Maria");//esse metodo é maior que na lista alfabetica
@@ -201,7 +227,6 @@ public class TelaLogin extends Activity {
     //filtrodebanco.whereStartsWith("Nome","M");//esse metodo traz objetos que iniciam com "M"
     //filtrodebanco.addAscendingOrder("Nome");//ordena de forma acendente
     //filtrodebanco.setLimit(1);//limitando a quantidade de objetos trazidos
-
     filtrodebanco.findInBackground(new FindCallback<ParseObject>() {//listar os objetos dentro do filtro, trazido pelo callback
       @Override
       public void done(List<ParseObject> objects, ParseException e) {
@@ -214,7 +239,6 @@ public class TelaLogin extends Activity {
           for(ParseObject object : objects){
             Log.i("Listagem de dados","Nome: " + object.get("Nome") + "Cpf: " + object.get("Cpf"));
           }
-
         }else{//getmessage para trazer a resposta de erro
           Log.i("Listagem de dados","Dados não listados na variável, Verifique!" + e.getMessage());
         }
@@ -225,6 +249,5 @@ public class TelaLogin extends Activity {
 
 
 
-    }
 
 
