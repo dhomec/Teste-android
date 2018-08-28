@@ -31,6 +31,7 @@ import com.back4app.quickstartexampleapp.TelasSetores.TelaAutomotivo;
 import com.back4app.quickstartexampleapp.TelasSetores.TelaBeleza;
 import com.back4app.quickstartexampleapp.TelasPerfil.TelaConfiguracao;
 import com.back4app.quickstartexampleapp.TelasPerfil.TelaSugestoes;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -45,7 +46,7 @@ public class TelaSetor extends AppCompatActivity
     private ArrayList<ItemLista> itens;
 
 
-
+    private FirebaseAuth autenticacao;
 
 
 
@@ -53,8 +54,11 @@ public class TelaSetor extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_lista_setor2);
+
+        autenticacao = FirebaseAuth.getInstance();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setLogo(R.mipmap.ic_carrim);
+        toolbar.setLogo(R.mipmap.logodeli);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -194,8 +198,17 @@ public class TelaSetor extends AppCompatActivity
         startActivity(intent);
 
     } private void telaSair() {
+       deslogarUsuario();
+
+    }
+
+    public void deslogarUsuario(){
+
+        autenticacao.signOut();
+
         Intent intent = new Intent(TelaSetor.this, TelaLogin.class);
         startActivity(intent);
+        finish();
     }
 
     @Override
@@ -241,16 +254,18 @@ public class TelaSetor extends AppCompatActivity
                 return super.onOptionsItemSelected(item);
 
 
-        //reações do menu deslizante
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
 
-        //noinspection SimplifiableIfStatement
 
 
     }}
 
+
+    //reações do menu deslizante
+    // Handle action bar item clicks here. The action bar will
+    // automatically handle clicks on the Home/Up button, so long
+    // as you specify a parent activity in AndroidManifest.xml.
+
+    //noinspection SimplifiableIfStatement
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
@@ -275,4 +290,7 @@ public class TelaSetor extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+
 }

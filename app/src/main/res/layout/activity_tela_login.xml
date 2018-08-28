@@ -8,33 +8,50 @@
     android:layout_gravity="center_vertical|center_horizontal"
     tools:context="com.back4app.quickstartexampleapp.Telas.TelaLogin">
 
+    <Button
+        android:id="@+id/btCriarConta"
+        android:layout_width="101dp"
+        android:layout_height="33dp"
+        android:layout_alignParentBottom="true"
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="47dp"
+        android:background="@drawable/fundo_botao"
+        android:text="NOVA CONTA" />
+
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="374dp"
+        android:layout_height="405dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="59dp">
 
 
-        <Button
-            android:id="@+id/btCriarConta"
-            android:layout_width="225dp"
-            android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="@+id/Login"
-            android:layout_alignParentLeft="true"
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="138dp"
+            android:layout_height="97dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/logodeli" />
 
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/campotexto"
-            android:text="NOVA CONTA" />
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="113dp"
+            android:layout_height="101dp"
+            android:layout_below="@+id/imageView4"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/nomedeli" />
 
         <EditText
             android:id="@+id/ctEmail"
             android:layout_width="185dp"
             android:layout_height="40dp"
-            android:layout_alignParentTop="true"
+            android:layout_below="@+id/imageView5"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="139dp"
             android:background="@drawable/campotexto"
             android:ems="10"
             android:inputType="textEmailAddress"
@@ -45,9 +62,8 @@
             android:id="@+id/ctSenha"
             android:layout_width="185dp"
             android:layout_height="40dp"
-            android:layout_alignParentTop="true"
+            android:layout_below="@+id/ctEmail"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="196dp"
             android:background="@drawable/campotexto"
             android:ems="10"
             android:inputType="textPassword"
@@ -56,11 +72,10 @@
 
         <ImageView
             android:id="@+id/Login"
-            android:layout_width="162dp"
-            android:layout_height="153dp"
-            android:layout_alignParentBottom="true"
+            android:layout_width="153dp"
+            android:layout_height="101dp"
+            android:layout_below="@+id/ctSenha"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="167dp"
             android:src="@mipmap/botaologin" />
 
 

@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 //import com.parse.LogInCallback;
 //import com.parse.ParseException;
 //import com.parse.ParseUser;
@@ -52,24 +53,32 @@ public class TelaLogin extends Activity {
         ctSenha = (EditText) findViewById(R.id.ctSenha);
 
 
-
-        btLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            //Verificando se o campo usuario e senha não estão em branco, instanciando a classe o usuario e conferindo os dados
-                if (!ctEmail.getText().toString().equals("") && !ctSenha.getText().toString().equals("")){
-
-                    usuario = new Usuario();
-                    usuario.setEmail(ctEmail.getText().toString());
-                    usuario.setSenha(ctSenha.getText().toString());
-                    validarlogin();
+        //Verificando se o usario esta logado e se sim enviando para tela de dentro
+        if (usuariologado()) {
+        abrirteladedentroLista();
+        }else {
+        Toast.makeText(TelaLogin.this, "Realize Login para acessar o Shopping!", Toast.LENGTH_SHORT).show();
+        }
 
 
-                }else {
-                Toast.makeText(TelaLogin.this, "Preencha os campos de E-mail e Senha", Toast.LENGTH_LONG).show();
+            btLogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //Verificando se o campo usuario e senha não estão em branco, instanciando a classe o usuario e conferindo os dados
+                    if (!ctEmail.getText().toString().equals("") && !ctSenha.getText().toString().equals("")) {
 
-            }
-        }});
+                        usuario = new Usuario();
+                        usuario.setEmail(ctEmail.getText().toString());
+                        usuario.setSenha(ctSenha.getText().toString());
+                        validarlogin();
+
+
+                    } else {
+                        Toast.makeText(TelaLogin.this, "Preencha os campos de E-mail e Senha", Toast.LENGTH_LONG).show();
+
+                    }
+                }
+            });
 
 
         btCriarConta.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +112,14 @@ public class TelaLogin extends Activity {
         }
 
 
+        public Boolean usuariologado () {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+            if (user != null){
+                return true;
+            }else{
+                return false;
+            }}
 
     }
 

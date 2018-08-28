@@ -4,47 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fundo_cadastro"
+    android:background="@mipmap/backlogin"
     android:layout_gravity="center_vertical|center_horizontal"
     tools:context=".Telas.TelaCadastro">
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="382dp"
         android:layout_height="484dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true">
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="13dp">
 
         <Button
             android:id="@+id/btCadastrar"
-            android:layout_width="match_parent"
+            android:layout_width="264dp"
             android:layout_height="40dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginBottom="85dp"
-            android:background="@drawable/campotexto"
+            android:layout_alignStart="@+id/ctRepetirSenha"
+            android:layout_alignLeft="@+id/ctRepetirSenha"
+            android:layout_marginBottom="119dp"
+            android:background="@drawable/fundo_botao"
             android:text="CADASTRAR" />
 
         <Button
             android:id="@+id/btLogar"
-            android:layout_width="match_parent"
+            android:layout_width="264dp"
             android:layout_height="40dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginBottom="33dp"
-            android:background="@drawable/campotexto"
+            android:layout_alignStart="@+id/btCadastrar"
+            android:layout_below="@+id/btCadastrar"
+            android:layout_marginTop="-117dp"
+            android:background="@drawable/fundo_botao"
             android:text="LOGAR" />
 
         <EditText
             android:id="@+id/ctNomeCadastrar"
-            android:layout_width="match_parent"
+            android:layout_width="266dp"
             android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="124dp"
+            android:layout_alignStart="@+id/btCadastrar"
+            android:layout_marginTop="111dp"
             android:background="@drawable/campotexto"
             android:ems="10"
             android:hint=" Digite seu nome completo"
@@ -54,12 +53,11 @@
 
         <EditText
             android:id="@+id/ctRepetirSenha"
-            android:layout_width="match_parent"
+            android:layout_width="261dp"
             android:layout_height="40dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginBottom="171dp"
+            android:layout_alignStart="@+id/ctSenhaCadastrar"
+            android:layout_marginBottom="169dp"
             android:background="@drawable/campotexto"
             android:ems="10"
             android:hint=" Repita sua senha"
@@ -69,11 +67,13 @@
 
         <EditText
             android:id="@+id/ctSenhaCadastrar"
-            android:layout_width="match_parent"
+            android:layout_width="262dp"
             android:layout_height="40dp"
-            android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="74dp"
+            android:layout_marginStart="74dp"
             android:background="@drawable/campotexto"
             android:ems="10"
             android:hint=" Digite sua senha"
@@ -83,12 +83,11 @@
 
         <EditText
             android:id="@+id/ctEmailCadastrar"
-            android:layout_width="match_parent"
+            android:layout_width="265dp"
             android:layout_height="40dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="171dp"
+            android:layout_alignStart="@+id/btCadastrar"
+            android:layout_marginTop="169dp"
             android:background="@drawable/campotexto"
             android:ems="10"
             android:hint=" Digite seu email"
@@ -99,11 +98,11 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="135dp"
-            android:layout_height="92dp"
+            android:layout_width="82dp"
+            android:layout_height="48dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="52dp"
             android:src="@mipmap/usuario" />
 
     </RelativeLayout></RelativeLayout>

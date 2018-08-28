@@ -4,12 +4,24 @@ import android.app.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.back4app.quickstartexampleapp.DAO.ConfiguracaoFirebase;
 import com.back4app.quickstartexampleapp.R;
+import com.back4app.quickstartexampleapp.util.Usuario;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 //import com.back4app.quickstartexampleapp.util.ParseErros;
 //import com.parse.ParseException;
 //import com.parse.ParseUser;
@@ -20,12 +32,17 @@ public class TelaCadastro extends Activity {
     private Button btCadastrar;
     private Button btLogar;
     private EditText ctNome;
-    private EditText ctSenha;
+    private EditText ctSenha1;
+    private EditText ctSenha2;
     private EditText ctEmail;
 
 
+    private FirebaseAuth autenticacao;
+    //depois de importar a biblioteca da firebase referencia ambas as classes para utilizar o database firebase
+    private FirebaseDatabase database;
+    private DatabaseReference referencia;
 
-
+    private Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,28 +50,106 @@ public class TelaCadastro extends Activity {
         setContentView(R.layout.activity_tela_cadastro);
 
         ctNome = (EditText) findViewById(R.id.ctNomeCadastrar);
-        ctSenha = (EditText) findViewById(R.id.ctSenhaCadastrar);
+        ctSenha1 = (EditText) findViewById(R.id.ctSenhaCadastrar);
+        ctSenha2 = (EditText) findViewById(R.id.ctRepetirSenha);
         ctEmail = (EditText) findViewById(R.id.ctEmailCadastrar);
 
         btCadastrar = (Button) findViewById(R.id.btCadastrar);
         btLogar = (Button) findViewById(R.id.btLogar);
 
-        //btCadastrar.setOnClickListener(new View.OnClickListener() {
-        //@Override
-        //public void onClick(View view) {
-          //      cadastrarUsuario();           }        });
+        btCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //se as senhas forem iguais, poderá cadastrar usuario
+                if (ctSenha1.getText().toString().equals(ctSenha2.getText().toString())) {
+
+                    usuario = new Usuario();
+                    usuario.setEmail(ctEmail.getText().toString());
+                    usuario.setSenha(ctSenha1.getText().toString());
+                    usuario.setNome(ctNome.getText().toString());
+
+                    cadastrarUsuario();
+
+                } else {
+                    Toast.makeText(TelaCadastro.this, "As Senhas não conferem", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
 
 
         btLogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 startActivity(new Intent(TelaCadastro.this, TelaLogin.class));
             }
         });
 
 
     }
+
+    private void cadastrarUsuario() {
+    //pegando a verificação se a autenticação é nula ou não
+    autenticacao = ConfiguracaoFirebase.getFirebaseAuth();
+
+    autenticacao.createUserWithEmailAndPassword(
+            usuario.getEmail(),
+            usuario.getSenha()).addOnCompleteListener(TelaCadastro.this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    //task é o resultado se positivo ou negativo quanto a criação
+                    if (task.isSuccessful()){
+
+                       insereUsuario(usuario);
+
+                    }else{//tratamento de erros
+
+                        String erroExcecao = "";
+                        try {
+                        throw task.getException();
+                        }catch (FirebaseAuthWeakPasswordException e){
+                        erroExcecao = "Digite uma senha mais forte, contendo no mínimo 8 caracteres e que contenha letras e números";
+                        }catch (FirebaseAuthInvalidCredentialsException e){
+                        erroExcecao = "O E-mail é inválido, digite um novo E-mail.";
+                        }catch (FirebaseAuthUserCollisionException e){
+                        erroExcecao = "O E-mail já está cadastrado!";
+                        }catch (Exception e) {
+                        erroExcecao = "Erro ao efetuar cadastro!";
+                            e.printStackTrace();
+                        }
+                        Toast.makeText(TelaCadastro.this, "Erro"+erroExcecao, Toast.LENGTH_SHORT);
+                    }
+                }
+            });   }
+
+
+
+    private boolean insereUsuario (Usuario usuario){
+        try {
+
+            referencia = ConfiguracaoFirebase.getFirebase().child("usuarios");//o firebase trabalha com nó, que é semelhante a tabela.
+            referencia.push().setValue(usuario);//gera uma chave como se fosse uma primary key, ajuda no cadastro de dados ao mesmo tempo
+
+
+
+
+            abrirteladedentro();
+            return true;
+
+        } catch (Exception e) {
+            Toast.makeText(TelaCadastro.this, "Erro ao gravar o usuário", Toast.LENGTH_LONG);
+            e.printStackTrace(); //linha para imprimir no terminal qual foi o erro
+
+            return false;
+        }
+    }
+    private void abrirteladedentro(){
+        Intent intent = new Intent(TelaCadastro.this, TelaLogin.class);
+        startActivity(intent);
+        Toast.makeText(TelaCadastro.this, "O usuário foi cadastrado com sucesso", Toast.LENGTH_SHORT);
+    }
+}
 
     //cadastrando usuarios
     //private void cadastrarUsuario() {
@@ -82,20 +177,9 @@ public class TelaCadastro extends Activity {
     //Intent intent = new Intent(TelaCadastro.this, TelaLogin.class);
    // startActivity(intent);
    // finish();
-    }
 
-
-
-
-
-
-
-
-
-
-        //ParseAnalytics.trackAppOpenedInBackground(getIntent());
-
-    /*//para criar a tabelinha e dados
+   //ParseAnalytics.trackAppOpenedInBackground(getIntent());
+   /*//para criar a tabelinha e dados
     ParseObject cadastro = new ParseObject("Cadastro");
     cadastro.put("Nome", "Tereza");
     cadastro.put("Cpf", "11222000111");
