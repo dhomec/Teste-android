@@ -81,40 +81,40 @@ public class TelaSetor extends AppCompatActivity
 
 
 
-        lista = (ListView) findViewById(R.id.lista);
-        lista.setAdapter(adapter);
+        //lista = (ListView) findViewById(R.id.lista);
+        //lista.setAdapter(adapter);
         //Define listener para quando clicar no item
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        //lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        //  @Override
+        //  public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                switch (i){
-                    case 0: telaFarmacias();
-                        break;
+        //      switch (i){
+        //          case 0: telaFarmacias();
+        //              break;
 
-                    case 1: telaAutomotivo();
-                        break;
+        //          case 1: telaAutomotivo();
+        //              break;
 
-                    case 2: telaBeleza();
-                        break;
+        //          case 2: telaBeleza();
+        //              break;
 
-                    case 3: telaDomestico();
-                        break;
+        //          case 3: telaDomestico();
+        //              break;
 
-                    case 4: telaAlimentacao();
-                        break;
+        //          case 4: telaAlimentacao();
+        //              break;
 
-                    case 5: telaEletronicos();
-                        break;
+        //          case 5: telaEletronicos();
+        //              break;
 
-                    case 6: telaModa();
-                        break;
-                }
-            }
-        });
+        //          case 6: telaModa();
+        //              break;
+        //      }
+        //  }
+        //});
 
 
-        createLista();
+        //createLista();
 
     }
 
