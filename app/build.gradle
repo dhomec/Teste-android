@@ -33,6 +33,7 @@ dependencies {
 
     implementation 'com.android.support:support-v4:26.1.0'
 
+
     //implementation 'com.parse:parse-android:1.16.2' //Para o banco de dados BACK4APP
 
     implementation 'com.google.firebase:firebase-core:16.0.1' // Para o bando de dados FIREBASE

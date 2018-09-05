@@ -1,4 +1,4 @@
-package com.back4app.quickstartexampleapp;
+package com.back4app.quickstartexampleapp.util;
 
 //import com.parse.Parse;
 //import com.parse.ParseACL;

@@ -1,10 +1,11 @@
 package com.back4app.quickstartexampleapp.Telas;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -15,13 +16,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.back4app.quickstartexampleapp.AdapterLista;
 import com.back4app.quickstartexampleapp.ItemLista;
+import com.back4app.quickstartexampleapp.LinhaRecycler;
 import com.back4app.quickstartexampleapp.R;
+import com.back4app.quickstartexampleapp.RecyclerAdapter;
 import com.back4app.quickstartexampleapp.TelasSetores.TelaModa;
 import com.back4app.quickstartexampleapp.TelasSetores.TelaEletronicos;
 import com.back4app.quickstartexampleapp.TelasSetores.TelaAlimentacao;
@@ -48,19 +51,26 @@ public class TelaSetor extends AppCompatActivity
 
     private FirebaseAuth autenticacao;
 
+    private RecyclerView recyclerView;
+    private RecyclerAdapter recyclerAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    ArrayList<String> title;
+    ArrayList<Integer> images;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tela_lista_setor2);
+        setContentView(R.layout.nav_activity_tela_lista_setor2);
 
         autenticacao = FirebaseAuth.getInstance();
 
+        //-------------------------------------------------------------------------
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setLogo(R.mipmap.logodeli);
         setSupportActionBar(toolbar);
 
+        //-------------------------------------------------------------------------
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,40 +88,66 @@ public class TelaSetor extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        //------------------------------------------------------------------------------
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+        title = new ArrayList<String>();
+        images = new ArrayList<Integer>();
+
+        title.add("Alimentação");
+        images.add(R.mipmap.alimentacaoback);
+        title.add("Automotivo");
+        images.add(R.mipmap.automotivoback);
+        title.add("Eletrônico");
+        images.add(R.mipmap.eletrodomesticoback);
+        title.add("Doméstico");
+        images.add(R.mipmap.domesticoback);
+        title.add("Moda");
+        images.add(R.mipmap.modaback);
+        title.add("Farmácias");
+        images.add(R.mipmap.farmaciaback);
+        title.add("Beleza");
+        images.add(R.mipmap.comesticoback);
 
 
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this, LinearLayout.HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerAdapter = new RecyclerAdapter(title, images);
+        recyclerView.setAdapter(recyclerAdapter);
 
-        //lista = (ListView) findViewById(R.id.lista);
-        //lista.setAdapter(adapter);
+
+      //  lista = (ListView) findViewById(R.id.listasetores);
+      //  lista.setAdapter(adapter);
         //Define listener para quando clicar no item
-        //lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        //  @Override
-        //  public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+      //  lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      //    @Override
+      //    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-        //      switch (i){
-        //          case 0: telaFarmacias();
-        //              break;
+      //        switch (i){
+      //            case 0: telaFarmacias();
+      //                break;
 
-        //          case 1: telaAutomotivo();
-        //              break;
+      //            case 1: telaAutomotivo();
+      //                break;
 
-        //          case 2: telaBeleza();
-        //              break;
+      //            case 2: telaBeleza();
+      //                break;
 
-        //          case 3: telaDomestico();
-        //              break;
+      //            case 3: telaDomestico();
+      //                break;
 
-        //          case 4: telaAlimentacao();
-        //              break;
+      //            case 4: telaAlimentacao();
+      //                break;
 
-        //          case 5: telaEletronicos();
-        //              break;
+      //            case 5: telaEletronicos();
+      //                break;
 
-        //          case 6: telaModa();
-        //              break;
-        //      }
-        //  }
-        //});
+      //            case 6: telaModa();
+      //               break;
+      //        }
+      //    }
+      //  });
 
 
         //createLista();
@@ -149,58 +185,46 @@ public class TelaSetor extends AppCompatActivity
     }
 
 
-    private void createLista() {
+   // private void createLista() {
         //criamos nossa lista que preenchera o listview
-        itens = new ArrayList<ItemLista>();
-        ItemLista item1 = new ItemLista("ALIMENTAÇÃO", R.mipmap.ic_alimentacao);
-        ItemLista item2 = new ItemLista("AUTOMOTIVO", R.mipmap.ic_automotivo);
-        ItemLista item3 = new ItemLista("BELEZA", R.mipmap.ic_beleza);
-        ItemLista item4 = new ItemLista("DOMÉSTICO", R.mipmap.ic_domestico);
-        ItemLista item5 = new ItemLista("ELETRONICOS", R.mipmap.ic_eletronico);
-        ItemLista item6 = new ItemLista("FARMÁCIAS", R.mipmap.ic_farmacia);
-        ItemLista item7 = new ItemLista("MODA", R.mipmap.ic_moda);
+   //     itens = new ArrayList<ItemLista>();
+   //     ItemLista item1 = new ItemLista("ALIMENTAÇÃO", R.mipmap.ic_alimentacao);
+   //     ItemLista item2 = new ItemLista("AUTOMOTIVO", R.mipmap.ic_automotivo);
+   //     ItemLista item3 = new ItemLista("BELEZA", R.mipmap.ic_beleza);
+   //     ItemLista item4 = new ItemLista("DOMÉSTICO", R.mipmap.ic_domestico);
+   //     ItemLista item5 = new ItemLista("ELETRONICOS", R.mipmap.ic_eletronico);
+   //     ItemLista item6 = new ItemLista("FARMÁCIAS", R.mipmap.ic_farmacia);
+   //     ItemLista item7 = new ItemLista("MODA", R.mipmap.ic_moda);
 
 
-        itens.add(item1);
-        itens.add(item2);
-        itens.add(item3);
-        itens.add(item4);
-        itens.add(item5);
-        itens.add(item6);
-        itens.add(item7);
+   //     itens.add(item1);
+   //     itens.add(item2);
+   //     itens.add(item3);
+   //     itens.add(item4);
+   //     itens.add(item5);
+   //     itens.add(item6);
+   //     itens.add(item7);
 
         //cria o adapter
-        adapter = new AdapterLista(this, itens);
+   //     adapter = new AdapterLista(this, itens);
 
         //define o adapter
-        lista.setAdapter(adapter);
+   //     lista.setAdapter(adapter);
 
         //cor quando a lista é selecionada para rolagem
-        lista.setCacheColorHint(Color.TRANSPARENT);
+   //     lista.setCacheColorHint(Color.TRANSPARENT);
 
-    }
+   // }
 
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+   // public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         //pega o item que foi selecionado
-        ItemLista item = adapter.getItem(i);
+   //     ItemLista item = adapter.getItem(i);
         //demonstração
-        Toast.makeText(this, "Você clicou em: " + item.getTexto(), Toast.LENGTH_LONG).show();
+   //     Toast.makeText(this, "Você clicou em: " + item.getTexto(), Toast.LENGTH_LONG).show();
 
-    }
+   // }
 
 
-    private void telaConfiguracao() {
-        Intent intent = new Intent(TelaSetor.this, TelaConfiguracao.class);
-        startActivity(intent);
-
-    } private void telaSugestoes() {
-        Intent intent = new Intent(TelaSetor.this, TelaSugestoes.class);
-        startActivity(intent);
-
-    } private void telaSair() {
-       deslogarUsuario();
-
-    }
 
     public void deslogarUsuario(){
 
@@ -253,12 +277,20 @@ public class TelaSetor extends AppCompatActivity
             default:
                 return super.onOptionsItemSelected(item);
 
+   }}
 
+    private void telaConfiguracao() {
+        Intent intent = new Intent(TelaSetor.this, TelaConfiguracao.class);
+        startActivity(intent);
 
+    } private void telaSugestoes() {
+        Intent intent = new Intent(TelaSetor.this, TelaSugestoes.class);
+        startActivity(intent);
 
+    } private void telaSair() {
+        deslogarUsuario();
 
-    }}
-
+    }
 
     //reações do menu deslizante
     // Handle action bar item clicks here. The action bar will
